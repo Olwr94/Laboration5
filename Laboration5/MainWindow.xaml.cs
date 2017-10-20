@@ -35,7 +35,7 @@ namespace Laboration5
             else
             {
                 userListBox.Items.Add(nameTextBox.Text.Trim());
-                //nameTextBox.Text = "";
+                nameTextBox.Text = "";
             }
 
             userListBox.Items.Add(usersTextBox.Text);
@@ -45,7 +45,6 @@ namespace Laboration5
         {
 
         }
-
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (userListBox.SelectedIndex >= 0)
@@ -65,7 +64,7 @@ namespace Laboration5
 
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-         
+            btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
         }
 
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
