@@ -35,10 +35,9 @@ namespace Laboration5
             else
             {
                 userListBox.Items.Add(nameTextBox.Text.Trim());
-                //nameTextBox.Text = "";
+                nameTextBox.Text = "";
             }
 
-            userListBox.Items.Add(usersTextBox.Text);
         }
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
