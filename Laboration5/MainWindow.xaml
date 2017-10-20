@@ -13,19 +13,19 @@
                 <GradientStop Color="#FF74A33D" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListBox x:Name="userListBox" HorizontalAlignment="Left" Height="158" Margin="25,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged"/>
-        <ListBox x:Name="adminListBox" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="175,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}" TextChanged="nameTextBox_TextChanged"/>
-        <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextChanged="emailTextBox_TextChanged"/>
+        <ListBox x:Name="userListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="25,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged" ToolTip="List of users"/>
+        <ListBox x:Name="adminListBox" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115" ToolTip="List of admins"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="175,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}" TextChanged="nameTextBox_TextChanged" ToolTip="Enter your name here.."/>
+        <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextChanged="emailTextBox_TextChanged" ToolTip="Enter your Email here.."/>
         <Label Content="Laboration 5" HorizontalAlignment="Center" Margin="195,0,183,0" Width="140" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontFamily="Rockwell" FontSize="20" Foreground="#FFC8BA33" HorizontalContentAlignment="Center"/>
         <TextBox x:Name="usersTextBox" HorizontalAlignment="Left" Height="23" Margin="25,10,0,0" TextWrapping="Wrap" Text="Users" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.268,0.464" TextDecorations="{x:Null}" HorizontalContentAlignment="Center" FontFamily="Elephant"/>
-        <TextBox x:Name="userLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="25,31,0,0" TextWrapping="Wrap" Text="0/30" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="userLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="25,31,0,0" TextWrapping="Wrap" Text="0/30" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center" ToolTip="User count"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="388,7,0,0" TextWrapping="Wrap" Text="Admin" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.268,0.464" TextDecorations="{x:Null}" HorizontalContentAlignment="Center" FontFamily="Elephant"/>
-        <TextBox x:Name="adminLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="388,31,0,0" TextWrapping="Wrap" Text="0/4" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center"/>
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="45,223,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnAdd_Click"/>
-        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Center" Margin="195,223,193,51" VerticalAlignment="Center" Width="130" Height="46" FontFamily="Elephant" HorizontalContentAlignment="Center" Click="btnChange_Click"/>
-        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="345,224,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnRemove_Click"/>
-        <Label x:Name="labelErrorText" Content="" HorizontalAlignment="Left" Margin="175,125,0,0" VerticalAlignment="Top" Width="182" Foreground="#FFC8BA33" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="adminLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="388,31,0,0" TextWrapping="Wrap" Text="0/4" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center" ToolTip="Admin count"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="45,223,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnAdd_Click" ToolTip="Add new person to Users"/>
+        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Center" Margin="195,223,193,51" VerticalAlignment="Center" Width="130" Height="46" FontFamily="Elephant" HorizontalContentAlignment="Center" Click="btnChange_Click" ToolTip="Switch person between userlist and adminlist" IsEnabled="False"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="345,224,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnRemove_Click" ToolTip="Remove person from user or adminlist"/>
+        <Label x:Name="UserInfo" Content="" HorizontalAlignment="Left" Margin="145,168,0,0" VerticalAlignment="Top" Width="330" Height="50"/>
 
     </Grid>
 </Window>
