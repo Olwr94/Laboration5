@@ -38,7 +38,6 @@ namespace Laboration5
                 nameTextBox.Text = "";
             }
 
-            userListBox.Items.Add(usersTextBox.Text);
         }
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
