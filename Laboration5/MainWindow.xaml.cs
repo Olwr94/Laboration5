@@ -27,15 +27,18 @@ namespace Laboration5
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) && string.IsNullOrWhiteSpace(emailTextBox.Text))
             {
                 nameTextBox.Text = "";
+                emailTextBox.Text = "";
             }
 
             else
             {
                 userListBox.Items.Add(nameTextBox.Text.Trim());
+                userListBox.Items.Add(emailTextBox.Text.Trim());
                 nameTextBox.Text = "";
+                emailTextBox.Text = "";
             }
 
         }
@@ -68,20 +71,47 @@ namespace Laboration5
 
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
+            if (nameTextBox.Text == string.Empty)
             {
-                btnAdd.IsEnabled = false;
+                if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
+                {
+                    btnAdd.IsEnabled = userListBox.SelectedIndex >= 0;
+                    btnAdd.IsEnabled = false;
 
-                if (userListBox.Items.Contains(nameTextBox.Text))
-                    labelErrorText.Content = "You can not type the same thing!";
-                if (string.IsNullOrWhiteSpace(nameTextBox.Text))
-                    labelErrorText.Content = "You need to type something";
+                    if (userListBox.Items.Contains(nameTextBox.Text))
+                        labelErrorText.Content = "You can not type the same thing!";
+                    if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+                        labelErrorText.Content = "You need to type something";
+                }
+                else if (btnAdd != null)
+                {
+                    btnAdd.IsEnabled = true;
+                    labelErrorText.Content = "";
+                }
             }
-            else if(btnAdd!=null)
+        }
+
+        private void emailTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (emailTextBox.Text == string.Empty)
             {
-                btnAdd.IsEnabled = true;
-                labelErrorText.Content = "";
+                if (string.IsNullOrWhiteSpace(emailTextBox.Text) || userListBox.Items.Contains(emailTextBox.Text))
+                {
+
+                    btnAdd.IsEnabled = false;
+
+                    if (userListBox.Items.Contains(emailTextBox.Text))
+                        labelErrorText.Content = "You can not type the same thing!";
+                    if (string.IsNullOrWhiteSpace(emailTextBox.Text))
+                        labelErrorText.Content = "You need to type something";
+                }
+                else if (btnAdd != null)
+                {
+                    btnAdd.IsEnabled = true;
+                    labelErrorText.Content = "";
+                }
             }
+
         }
     }
 }
