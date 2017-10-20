@@ -6,18 +6,25 @@
         xmlns:local="clr-namespace:Laboration5"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ListBox HorizontalAlignment="Left" Height="160" Margin="29,28,0,0" VerticalAlignment="Top" Width="120"/>
-        <ListBox HorizontalAlignment="Left" Height="120" Margin="357,28,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Users" HorizontalAlignment="Left" Margin="61,2,0,0" VerticalAlignment="Top"/>
-        <Label Content="Admins" HorizontalAlignment="Left" Margin="377,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.44,0.055"/>
-        <Button Content="Change" HorizontalAlignment="Left" Margin="220,233,0,0" VerticalAlignment="Top" Width="100" Height="38" RenderTransformOrigin="0.602,0.942"/>
-        <Button Content="Add" HorizontalAlignment="Left" Margin="94,233,0,0" VerticalAlignment="Top" Width="100" Height="38"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Margin="342,233,0,0" VerticalAlignment="Top" Width="100" Height="38"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="171,28,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="172"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="171,74,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="172"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="104,5,0,0" TextWrapping="Wrap" Text="0/10" VerticalAlignment="Top" Width="45"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="432,5,0,0" TextWrapping="Wrap" Text="0/3" VerticalAlignment="Top" Width="45" RenderTransformOrigin="0.244,0.504"/>
+    <Grid Margin="0,0,0.4,0" Height="320" VerticalAlignment="Top">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FFA3913D" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ListBox x:Name="userListBox" HorizontalAlignment="Left" Height="158" Margin="25,48,0,0" VerticalAlignment="Top" Width="115"/>
+        <ListBox x:Name="adminListBox" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="175,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}"/>
+        <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic"/>
+        <Label Content="Laboration 5" HorizontalAlignment="Center" Margin="195,0,183,0" Width="140" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontFamily="Rockwell" FontSize="20" Foreground="#FFC8BA33" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="usersTextBox" HorizontalAlignment="Left" Height="23" Margin="25,10,0,0" TextWrapping="Wrap" Text="Users" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.268,0.464" TextDecorations="{x:Null}" HorizontalContentAlignment="Center" FontFamily="Elephant"/>
+        <TextBox x:Name="userLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="25,31,0,0" TextWrapping="Wrap" Text="0/30" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="388,7,0,0" TextWrapping="Wrap" Text="Admin" VerticalAlignment="Top" Width="115" RenderTransformOrigin="0.268,0.464" TextDecorations="{x:Null}" HorizontalContentAlignment="Center" FontFamily="Elephant"/>
+        <TextBox x:Name="adminLimitTextBox" HorizontalAlignment="Left" Height="17" Margin="388,31,0,0" TextWrapping="Wrap" Text="0/4" VerticalAlignment="Top" Width="115" FontSize="11" HorizontalContentAlignment="Center"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="45,223,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnAdd_Click"/>
+        <Button x:Name="btnChange" Content="Change" HorizontalAlignment="Center" Margin="195,223,193,51" VerticalAlignment="Center" Width="130" Height="46" FontFamily="Elephant" HorizontalContentAlignment="Center" Click="btnChange_Click"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="345,224,0,0" VerticalAlignment="Top" Width="130" Height="46" FontFamily="Elephant" Click="btnRemove_Click"/>
 
     </Grid>
 </Window>
