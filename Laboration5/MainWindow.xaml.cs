@@ -27,7 +27,7 @@ namespace Laboration5
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            userListBox.Items.Add(userListBox.Items);
         }
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
@@ -40,6 +40,9 @@ namespace Laboration5
 
         }
 
-     
+        private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+         
+        }
     }
 }

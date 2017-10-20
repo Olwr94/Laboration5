@@ -10,10 +10,10 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="#FFA3913D" Offset="1"/>
+                <GradientStop Color="#FF74A33D" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListBox x:Name="userListBox" HorizontalAlignment="Left" Height="158" Margin="25,48,0,0" VerticalAlignment="Top" Width="115"/>
+        <ListBox x:Name="userListBox" HorizontalAlignment="Left" Height="158" Margin="25,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged"/>
         <ListBox x:Name="adminListBox" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="175,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="175,87,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic"/>
