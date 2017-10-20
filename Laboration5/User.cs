@@ -13,8 +13,8 @@ namespace Laboration5
 
         public User(string name, string email)
         {
-            this.Name = name;
-            this.Email = email;
+            Name = name;
+            Email = email;
         }
     }
 }

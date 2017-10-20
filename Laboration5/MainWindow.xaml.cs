@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace Laboration5
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string emailPattern = @"(\w|\D)+[@](\w|\D)+\.(\w|\D)+";
         public MainWindow()
         {
             InitializeComponent();
@@ -27,13 +29,15 @@ namespace Laboration5
         //Add button
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text))
+            Match match = Regex.Match(emailTextBox.Text, emailPattern);
+
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text) || !match.Success)
             {
                 nameTextBox.Text = "";
                 emailTextBox.Text = "";
             }
             else
-            { 
+            {
                 userListBox.Items.Add(new User(nameTextBox.Text, emailTextBox.Text));
                 nameTextBox.Text = "";
                 emailTextBox.Text = "";
@@ -70,46 +74,60 @@ namespace Laboration5
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
-            if((User)userListBox.SelectedItem != null)
-            {
-                UserInfo.Content = ((User)userListBox.SelectedItem).Name + " " + 
-                                   ((User)userListBox.SelectedItem).Email;
-            }
+            if ((User)userListBox.SelectedItem != null)
+                userInfoLabel.Content = "Name: " + ((User)userListBox.SelectedItem).Name + "\n" + "Email: " +
+                                        ((User)userListBox.SelectedItem).Email;
+            else
+                userInfoLabel.Content = string.Empty;
+
         }
         //name text box
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {                
+        {
+
             if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
             {
                 btnAdd.IsEnabled = userListBox.SelectedIndex >= 0;
                 btnAdd.IsEnabled = false;
 
                 if (userListBox.Items.Contains(nameTextBox.Text))
-                    MessageBox.Show("You can not type the same thing!");
+                    //MessageBox.Show("Can not contain same text as before");
+                    labelNameErrorText.Content = "You can not type the same thing!";
                 if (string.IsNullOrWhiteSpace(nameTextBox.Text))
-                    MessageBox.Show("Fill in both fields");                       
+                    //MessageBox.Show("Must type a name");
+                    labelNameErrorText.Content = "Must type a name";
             }
             else if (btnAdd != null)
             {
                 btnAdd.IsEnabled = true;
-            }       
+                labelNameErrorText.Content = "";
+            }
+
         }
+
         private void emailTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        { 
-             
-             if (string.IsNullOrWhiteSpace(emailTextBox.Text) || userListBox.Items.Contains(emailTextBox.Text))
-             {
+        {
+          
+
+            if (string.IsNullOrWhiteSpace(emailTextBox.Text) || userListBox.Items.Contains(emailTextBox.Text))
+            {
+
                 btnAdd.IsEnabled = false;
 
                 if (userListBox.Items.Contains(emailTextBox.Text))
-                    MessageBox.Show("You can not type the same thing!");
+                    //MessageBox.Show("Can not contain same text as before");
+                    labelEmailErrorText.Content = "You can not type the same thing!";
                 if (string.IsNullOrWhiteSpace(emailTextBox.Text))
-                    MessageBox.Show("Fill in both fields");
-             }
-             else if (btnAdd != null)
-             {
+                   // MessageBox.Show("Must type an email adress!");
+                labelEmailErrorText.Content = "Must type email adress!";
+            }
+            else if (btnAdd != null)
+            {
                 btnAdd.IsEnabled = true;
-             }         
+                labelEmailErrorText.Content = "";
+            }
+
+
         }
     }
 }
