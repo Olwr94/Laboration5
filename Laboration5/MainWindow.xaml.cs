@@ -47,6 +47,18 @@ namespace Laboration5
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            if (userListBox.SelectedIndex >= 0)
+            {
+                int position = userListBox.SelectedIndex;
+                userListBox.Items.RemoveAt(position);
+                if (userListBox.Items.Count <= position)
+                    userListBox.SelectedIndex = position - 1;
+                else
+                    userListBox.SelectedIndex = position;
+
+                if (userListBox.Items.Count == 0)
+                    btnRemove.IsEnabled = false;
+            }
 
         }
 
