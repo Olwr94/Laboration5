@@ -27,7 +27,18 @@ namespace Laboration5
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            userListBox.Items.Add(userListBox.Items);
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                nameTextBox.Text = "";
+            }
+
+            else
+            {
+                userListBox.Items.Add(nameTextBox.Text.Trim());
+                //nameTextBox.Text = "";
+            }
+
+            userListBox.Items.Add(usersTextBox.Text);
         }
 
         private void btnChange_Click(object sender, RoutedEventArgs e)
@@ -43,6 +54,24 @@ namespace Laboration5
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
          
+        }
+
+        private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
+            {
+                btnAdd.IsEnabled = false;
+
+                if (userListBox.Items.Contains(nameTextBox.Text))
+                    labelErrorText.Content = "You can not type the same thing!";
+                if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+                    labelErrorText.Content = "You need to type something";
+            }
+            else if(btnAdd!=null)
+            {
+                btnAdd.IsEnabled = true;
+                labelErrorText.Content = "";
+            }
         }
     }
 }
