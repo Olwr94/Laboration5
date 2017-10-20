@@ -24,15 +24,14 @@ namespace Laboration5
         {
             InitializeComponent();
         }
-
+        //Add button
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text) && string.IsNullOrWhiteSpace(emailTextBox.Text))
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text))
             {
                 nameTextBox.Text = "";
                 emailTextBox.Text = "";
             }
-
             else
             {
                 userListBox.Items.Add(nameTextBox.Text.Trim());
@@ -40,13 +39,13 @@ namespace Laboration5
                 nameTextBox.Text = "";
                 emailTextBox.Text = "";
             }
-
         }
-
+        //Change button
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        //Remove button
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             if (userListBox.SelectedIndex >= 0)
@@ -61,14 +60,13 @@ namespace Laboration5
                 if (userListBox.Items.Count == 0)
                     btnRemove.IsEnabled = false;
             }
-
         }
-
+        //User List box
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
         }
-
+        //name text box
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (nameTextBox.Text == string.Empty)
