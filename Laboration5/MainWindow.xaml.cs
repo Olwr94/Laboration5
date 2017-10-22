@@ -29,7 +29,7 @@ namespace Laboration5
             InitializeComponent();
         }
 
-        //Method to add objects name into generic list and then returns the names.
+        //Method to add objects name into generic list and then returns the name
         private List<string> UserNameList(ListBox lb)
         {
 
@@ -42,23 +42,24 @@ namespace Laboration5
             return objectName;
         }
 
+        //Method to add objects email into a generic list and then returns the email
         private List<string> UserEmailList(ListBox lb)
         {
 
-            List<string> objectName = new List<string>();
+            List<string> objectEmail = new List<string>();
             for (int i = 0; i < lb.Items.Count; i++)
             {
-                objectName.Add(((User)lb.Items.GetItemAt(i)).Email);
+                objectEmail.Add(((User)lb.Items.GetItemAt(i)).Email);
             }
 
-            return objectName;
+            return objectEmail;
         }
 
         //Add button
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             Match match = Regex.Match(emailTextBox.Text, EmailPattern);
-
+            //Checks if the Textboxes is empty or email already exists.
             if ((string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text)) ||
                 !match.Success)
             {
@@ -76,6 +77,7 @@ namespace Laboration5
         //Change button
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
+            //Puts selected objects name and email into textboxes
             if (userListBox.SelectedIndex >= 0)
             {
                 nameTextBox.Text = ((User)userListBox.SelectedItem).Name;
@@ -86,15 +88,12 @@ namespace Laboration5
                 nameTextBox.Text = ((User)adminListBox.SelectedItem).Name;
                 emailTextBox.Text = ((User)adminListBox.SelectedItem).Email;
             }
-            if (userListBox.SelectedIndex != 0)
-            {
-                btnChange.IsEnabled = true;
-            }
         }
 
-        //Remove button
+        //Remove object button
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            //Selection moves down after a removed objects till there are none then it moves up till listbox is empty
             if (userListBox.SelectedIndex >= 0)
             {
                 int position = userListBox.SelectedIndex;
@@ -112,7 +111,7 @@ namespace Laboration5
             }
         }
 
-        //User List box
+        //User listbox
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
@@ -124,20 +123,20 @@ namespace Laboration5
                     $"Name: {((User)userListBox.SelectedItem).Name} \nEmail: {((User)userListBox.SelectedItem).Email}";
             else
                 userInfoLabel.Content = string.Empty;
-
-
         }
 
+        //Name textbox
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Checks if name already exists in any of the listboxes and set the add button to false if it does
+            //Checks if name already exists in any of the listboxes and sets the add button to false if it does
             if (string.IsNullOrWhiteSpace(nameTextBox.Text) || UserNameList(userListBox).Contains(nameTextBox.Text) ||
                 UserNameList(adminListBox).Contains(nameTextBox.Text))
             {
                 btnAdd.IsEnabled = false;
-
+                //Gives error text if name exists in either list boxes
                 if (UserNameList(userListBox).Contains(nameTextBox.Text) || UserNameList(adminListBox).Contains(nameTextBox.Text))
                     labelNameErrorText.Content = "Name is already taken";
+                //Gives error text if Name textbox is empty or whitespace
                 if (string.IsNullOrWhiteSpace(nameTextBox.Text))
                     labelNameErrorText.Content = "Type a name";
             }
@@ -148,16 +147,18 @@ namespace Laboration5
             }
         }
 
+        //Email textbox
         private void emailTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //Checks if Email already exists in any of the listboxes and set the add button to false if it does
+            //Checks if Email already exists in any of the listboxes and sets the add button to false if it does
             if (string.IsNullOrWhiteSpace(emailTextBox.Text) || UserEmailList(userListBox).Contains(emailTextBox.Text) ||
                 UserEmailList(adminListBox).Contains(emailTextBox.Text))
             {
                 btnAdd.IsEnabled = false;
-
+                //Gives error text if email exists in either list boxes
                 if (UserEmailList(userListBox).Contains(emailTextBox.Text) || UserEmailList(adminListBox).Contains(emailTextBox.Text))
                     labelEmailErrorText.Content = "Email adress is already taken";
+                //Gives error text if email textbox is empty or whitespace
                 if (string.IsNullOrWhiteSpace(emailTextBox.Text))
                     labelEmailErrorText.Content = "Type an email adress!";
             }
@@ -168,6 +169,7 @@ namespace Laboration5
             }
         }
 
+        //Move user button
         private void btnMoveUserToAdmin_Click(object sender, RoutedEventArgs e)
         {
             //Moves selected user objects from user listbox to admin listbox
@@ -180,7 +182,7 @@ namespace Laboration5
                 btnMoveUserToAdmin.IsEnabled = false;
         }
 
-
+        //Move Admin button
         private void btnMoveAdminToUser_Click(object sender, RoutedEventArgs e)
         {
             //Moves selected user objects from admin listbox to user listbox
@@ -192,7 +194,8 @@ namespace Laboration5
             if (adminListBox.Items.Count == 0)
                 btnMoveAdminToUser.IsEnabled = false;
         }
-
+        
+        //Admin list box
         private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnMoveAdminToUser.IsEnabled = adminListBox.SelectedIndex >= 0;
