@@ -14,8 +14,8 @@
                 <GradientStop Color="#FF819070" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListBox x:Name="userListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged"/>
-        <ListBox x:Name="adminListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="adminListBox_SelectionChanged"/>
+        <ListBox x:Name="userListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="10,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged" SelectionMode="Extended"/>
+        <ListBox x:Name="adminListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="114" Margin="388,48,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="adminListBox_SelectionChanged" SelectionMode="Extended"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="165,48,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}" TextChanged="nameTextBox_TextChanged"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="165,87,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextChanged="emailTextBox_TextChanged"/>
         <Label Content="Laboration 5" HorizontalAlignment="Center" Margin="187,0,191,0" Width="140" VerticalAlignment="Top" FontWeight="Bold" FontStyle="Italic" FontFamily="Rockwell" FontSize="20" Foreground="#FFD6A1E2" HorizontalContentAlignment="Center" Background="{x:Null}"/>
