@@ -77,7 +77,8 @@ namespace Laboration5
         //Change button
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
-            var user = (User) userListBox.SelectedItem;
+            var normalUser = (User)userListBox.SelectedItem;
+            var adminUser = (User)adminListBox.SelectedItem;
 
             if (btnChange.Content.ToString() == "Edit")
             {
@@ -85,28 +86,28 @@ namespace Laboration5
                 //Puts selected objects name and email into textboxes
                 if (userListBox.SelectedIndex >= 0)
                 {
-                    nameTextBox.Text = user.Name;
-                    emailTextBox.Text = user.Email;
+                    nameTextBox.Text = normalUser.Name;
+                    emailTextBox.Text = normalUser.Email;
                 }
                 if (adminListBox.SelectedIndex >= 0)
                 {
-                    nameTextBox.Text = user.Name;
-                    emailTextBox.Text = user.Email;
+                    nameTextBox.Text = adminUser.Name;
+                    emailTextBox.Text = adminUser.Email;
                 }
             }
             else if (btnChange.Content.ToString() == "Apply")
             {
               
                 btnChange.Content = "Edit";
-                user.Name = nameTextBox.Text;
-                user.Email = emailTextBox.Text;
+                normalUser.Name = nameTextBox.Text;
+                normalUser.Email = emailTextBox.Text;
                 userListBox.Items.Refresh();
                 adminListBox.Items.Refresh();
                 adminListBox.SelectedIndex = -1;
                 userListBox.SelectedIndex = -1;
                 nameTextBox.Clear();
                 emailTextBox.Clear();
-                userInfoLabel.Content = $"Name: {user.Name}\nEmail: {user.Email}";
+                userInfoLabel.Content = $"Name: {normalUser.Name}\nEmail: {normalUser.Email}";
             }
         
         }
