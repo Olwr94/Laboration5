@@ -32,26 +32,22 @@ namespace Laboration5
         //Method to add objects name into generic list and then returns the name
         private List<string> UserNameList(ListBox lb)
         {
-
             List<string> objectName = new List<string>();
             for (int i = 0; i < lb.Items.Count; i++)
             {
                 objectName.Add(((User)lb.Items.GetItemAt(i)).Name);
             }
-
             return objectName;
         }
 
         //Method to add objects email into a generic list and then returns the email
         private List<string> UserEmailList(ListBox lb)
         {
-
             List<string> objectEmail = new List<string>();
             for (int i = 0; i < lb.Items.Count; i++)
             {
                 objectEmail.Add(((User)lb.Items.GetItemAt(i)).Email);
             }
-
             return objectEmail;
         }
 
@@ -97,7 +93,6 @@ namespace Laboration5
             }
             else if (btnChange.Content.ToString() == "Apply")
             {
-
                 btnChange.Content = "Edit";
                 if (userListBox.SelectedIndex >= 0)
                 {
@@ -107,7 +102,7 @@ namespace Laboration5
                     userListBox.SelectedIndex = -1;
                     nameTextBox.Clear();
                     emailTextBox.Clear();
-                userInfoLabel.Content = $"Name: {normalUser.Name}\nEmail: {normalUser.Email}";
+                    userInfoLabel.Content = $"Name: {normalUser.Name}\nEmail: {normalUser.Email}";
                 }
                 if (adminListBox.SelectedIndex >= 0)
                 {
@@ -119,9 +114,7 @@ namespace Laboration5
                     emailTextBox.Clear();
                     userInfoLabel.Content = $"Name: {adminUser.Name}\nEmail: {adminUser.Email}";
                 }
-
             }
-
         }
 
         //Remove object button
