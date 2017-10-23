@@ -14,7 +14,7 @@
                 <GradientStop Color="#FF819070" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <ListBox x:Name="userListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="43,57,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged" SelectionMode="Extended"/>
+        <ListBox x:Name="userListBox" IsSelected="False" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="43,57,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="userListBox_SelectionChanged" SelectionMode="Extended"/>
         <ListBox x:Name="adminListBox" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="158" Margin="421,57,0,0" VerticalAlignment="Top" Width="115" SelectionChanged="adminListBox_SelectionChanged" SelectionMode="Extended"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="23" Margin="198,70,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextDecorations="{x:Null}" TextChanged="nameTextBox_TextChanged"/>
         <TextBox x:Name="emailTextBox" HorizontalAlignment="Left" Height="23" Margin="198,109,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="182" FontStyle="Italic" TextChanged="emailTextBox_TextChanged"/>

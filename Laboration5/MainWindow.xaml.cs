@@ -22,7 +22,7 @@ namespace Laboration5
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string EmailPattern = @"(\w|\D)+[@](\w|\D)+\.(\w|\D)+";
+        public string EmailPattern = @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$";
 
         public MainWindow()
         {
@@ -102,6 +102,10 @@ namespace Laboration5
                 user.Email = emailTextBox.Text;
                 userListBox.Items.Refresh();
                 adminListBox.Items.Refresh();
+                adminListBox.SelectedIndex = -1;
+                userListBox.SelectedIndex = -1;
+                nameTextBox.Clear();
+                emailTextBox.Clear();
                 userInfoLabel.Content = $"Name: {user.Name}\nEmail: {user.Email}";
             }
         
