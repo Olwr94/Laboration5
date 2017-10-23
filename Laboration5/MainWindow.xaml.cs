@@ -79,7 +79,7 @@ namespace Laboration5
         {
             var user = (User) userListBox.SelectedItem;
 
-            if (btnChange.Content.ToString() == "Change")
+            if (btnChange.Content.ToString() == "Edit")
             {
                 btnChange.Content = "Apply";
                 //Puts selected objects name and email into textboxes
@@ -96,10 +96,15 @@ namespace Laboration5
             }
             else if (btnChange.Content.ToString() == "Apply")
             {
-                btnChange.Content = "Change";
+              
+                btnChange.Content = "Edit";
                 user.Name = nameTextBox.Text;
                 user.Email = emailTextBox.Text;
+                userListBox.Items.Refresh();
+                adminListBox.Items.Refresh();
+                userInfoLabel.Content = $"Name: {user.Name}\nEmail: {user.Email}";
             }
+        
         }
 
         //Remove object button
@@ -128,6 +133,7 @@ namespace Laboration5
         {
             btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
             btnMoveUserToAdmin.IsEnabled = userListBox.SelectedIndex >= 0;
+            btnChange.IsEnabled = userListBox.SelectedIndex >= 0;
 
             //Shows userinfo from user listbox in label
             if ((User)userListBox.SelectedItem != null)
@@ -210,6 +216,8 @@ namespace Laboration5
         //Admin list box
         private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            btnRemove.IsEnabled = adminListBox.SelectedIndex >= 0;
+            btnChange.IsEnabled = adminListBox.SelectedIndex >= 0;
             btnMoveAdminToUser.IsEnabled = adminListBox.SelectedIndex >= 0;
             //Shows admin info from admin listbox
             if ((User)adminListBox.SelectedItem != null)
