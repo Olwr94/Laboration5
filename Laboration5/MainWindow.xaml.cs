@@ -58,7 +58,7 @@ namespace Laboration5
         //Add button
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Match match = Regex.Match(emailTextBox.Text, EmailPattern);
+            Match match = Regex.Match(emailTextBox.Text, EmailPattern, RegexOptions.IgnoreCase);
             //Checks if the Textboxes is empty or email already exists.
             if ((string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text)) ||
                 !match.Success)
