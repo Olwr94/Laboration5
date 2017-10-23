@@ -97,19 +97,31 @@ namespace Laboration5
             }
             else if (btnChange.Content.ToString() == "Apply")
             {
-              
+
                 btnChange.Content = "Edit";
-                normalUser.Name = nameTextBox.Text;
-                normalUser.Email = emailTextBox.Text;
-                userListBox.Items.Refresh();
-                adminListBox.Items.Refresh();
-                adminListBox.SelectedIndex = -1;
-                userListBox.SelectedIndex = -1;
-                nameTextBox.Clear();
-                emailTextBox.Clear();
+                if (userListBox.SelectedIndex >= 0)
+                {
+                    normalUser.Name = nameTextBox.Text;
+                    normalUser.Email = emailTextBox.Text;
+                    userListBox.Items.Refresh();
+                    userListBox.SelectedIndex = -1;
+                    nameTextBox.Clear();
+                    emailTextBox.Clear();
                 userInfoLabel.Content = $"Name: {normalUser.Name}\nEmail: {normalUser.Email}";
+                }
+                if (adminListBox.SelectedIndex >= 0)
+                {
+                    adminUser.Name = nameTextBox.Text;
+                    adminUser.Email = emailTextBox.Text;
+                    adminListBox.Items.Refresh();
+                    adminListBox.SelectedIndex = -1;
+                    nameTextBox.Clear();
+                    emailTextBox.Clear();
+                    userInfoLabel.Content = $"Name: {adminUser.Name}\nEmail: {adminUser.Email}";
+                }
+
             }
-        
+
         }
 
         //Remove object button
@@ -129,6 +141,21 @@ namespace Laboration5
                     userListBox.SelectedIndex = position;
                 }
                 if (userListBox.Items.Count == 0)
+                    btnRemove.IsEnabled = false;
+            }
+            if (adminListBox.SelectedIndex >= 0)
+            {
+                int position = adminListBox.SelectedIndex;
+                adminListBox.Items.RemoveAt(position);
+                if (adminListBox.Items.Count <= position)
+                {
+                    adminListBox.SelectedIndex = position - 1;
+                }
+                else
+                {
+                    adminListBox.SelectedIndex = position;
+                }
+                if (adminListBox.Items.Count == 0)
                     btnRemove.IsEnabled = false;
             }
         }
