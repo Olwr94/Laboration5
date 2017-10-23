@@ -79,12 +79,10 @@ namespace Laboration5
                                         ((User)userListBox.SelectedItem).Email;
             else
                 userInfoLabel.Content = string.Empty;
-
         }
         //name text box
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
             {
                 btnAdd.IsEnabled = userListBox.SelectedIndex >= 0;
@@ -102,32 +100,26 @@ namespace Laboration5
                 btnAdd.IsEnabled = true;
                 labelNameErrorText.Content = "";
             }
-
         }
-
         private void emailTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-          
-
             if (string.IsNullOrWhiteSpace(emailTextBox.Text) || userListBox.Items.Contains(emailTextBox.Text))
             {
-
                 btnAdd.IsEnabled = false;
 
                 if (userListBox.Items.Contains(emailTextBox.Text))
                     //MessageBox.Show("Can not contain same text as before");
                     labelEmailErrorText.Content = "You can not type the same thing!";
                 if (string.IsNullOrWhiteSpace(emailTextBox.Text))
-                   // MessageBox.Show("Must type an email adress!");
-                labelEmailErrorText.Content = "Must type email adress!";
+                    // MessageBox.Show("Must type an email adress!");
+                    labelEmailErrorText.Content = "Must type email adress!";
             }
             else if (btnAdd != null)
             {
                 btnAdd.IsEnabled = true;
                 labelEmailErrorText.Content = "";
             }
-
-
         }
     }
 }
+
