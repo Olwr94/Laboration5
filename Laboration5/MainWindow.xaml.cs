@@ -77,16 +77,28 @@ namespace Laboration5
         //Change button
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
-            //Puts selected objects name and email into textboxes
-            if (userListBox.SelectedIndex >= 0)
+            var user = (User) userListBox.SelectedItem;
+
+            if (btnChange.Content.ToString() == "Change")
             {
-                nameTextBox.Text = ((User)userListBox.SelectedItem).Name;
-                emailTextBox.Text = ((User)userListBox.SelectedItem).Email;
+                btnChange.Content = "Apply";
+                //Puts selected objects name and email into textboxes
+                if (userListBox.SelectedIndex >= 0)
+                {
+                    nameTextBox.Text = user.Name;
+                    emailTextBox.Text = user.Email;
+                }
+                if (adminListBox.SelectedIndex >= 0)
+                {
+                    nameTextBox.Text = user.Name;
+                    emailTextBox.Text = user.Email;
+                }
             }
-            if (adminListBox.SelectedIndex >= 0)
+            else if (btnChange.Content.ToString() == "Apply")
             {
-                nameTextBox.Text = ((User)adminListBox.SelectedItem).Name;
-                emailTextBox.Text = ((User)adminListBox.SelectedItem).Email;
+                btnChange.Content = "Change";
+                user.Name = nameTextBox.Text;
+                user.Email = emailTextBox.Text;
             }
         }
 
@@ -194,7 +206,7 @@ namespace Laboration5
             if (adminListBox.Items.Count == 0)
                 btnMoveAdminToUser.IsEnabled = false;
         }
-        
+
         //Admin list box
         private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
