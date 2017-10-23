@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Xsl;
 
 namespace Laboration5
 {
@@ -21,17 +22,46 @@ namespace Laboration5
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string emailPattern = @"(\w|\D)+[@](\w|\D)+\.(\w|\D)+";
+        public string EmailPattern = @"(\w|\D)+[@](\w|\D)+\.(\w|\D)+";
+
         public MainWindow()
         {
             InitializeComponent();
-        }   
+        }
+
+        //Method to add objects name into generic list and then returns the name
+        private List<string> UserNameList(ListBox lb)
+        {
+
+            List<string> objectName = new List<string>();
+            for (int i = 0; i < lb.Items.Count; i++)
+            {
+                objectName.Add(((User)lb.Items.GetItemAt(i)).Name);
+            }
+
+            return objectName;
+        }
+
+        //Method to add objects email into a generic list and then returns the email
+        private List<string> UserEmailList(ListBox lb)
+        {
+
+            List<string> objectEmail = new List<string>();
+            for (int i = 0; i < lb.Items.Count; i++)
+            {
+                objectEmail.Add(((User)lb.Items.GetItemAt(i)).Email);
+            }
+
+            return objectEmail;
+        }
+
         //Add button
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Match match = Regex.Match(emailTextBox.Text, emailPattern);
-
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text) || !match.Success)
+            Match match = Regex.Match(emailTextBox.Text, EmailPattern);
+            //Checks if the Textboxes is empty or email already exists.
+            if ((string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text)) ||
+                !match.Success)
             {
                 nameTextBox.Text = "";
                 emailTextBox.Text = "";
@@ -43,17 +73,27 @@ namespace Laboration5
                 emailTextBox.Text = "";
             }
         }
+
         //Change button
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
-            if(userListBox.SelectedIndex != 0)
+            //Puts selected objects name and email into textboxes
+            if (userListBox.SelectedIndex >= 0)
             {
-                btnChange.IsEnabled = true;
+                nameTextBox.Text = ((User)userListBox.SelectedItem).Name;
+                emailTextBox.Text = ((User)userListBox.SelectedItem).Email;
+            }
+            if (adminListBox.SelectedIndex >= 0)
+            {
+                nameTextBox.Text = ((User)adminListBox.SelectedItem).Name;
+                emailTextBox.Text = ((User)adminListBox.SelectedItem).Email;
             }
         }
-        //Remove button
+
+        //Remove object button
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            //Selection moves down after a removed objects till there are none then it moves up till listbox is empty
             if (userListBox.SelectedIndex >= 0)
             {
                 int position = userListBox.SelectedIndex;
@@ -70,30 +110,35 @@ namespace Laboration5
                     btnRemove.IsEnabled = false;
             }
         }
-        //User List box
+
+        //User listbox
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnRemove.IsEnabled = userListBox.SelectedIndex >= 0;
+            btnMoveUserToAdmin.IsEnabled = userListBox.SelectedIndex >= 0;
+
+            //Shows userinfo from user listbox in label
             if ((User)userListBox.SelectedItem != null)
-                userInfoLabel.Content = "Name: " + ((User)userListBox.SelectedItem).Name + "\n" + "Email: " +
-                                        ((User)userListBox.SelectedItem).Email;
+                userInfoLabel.Content =
+                    $"Name: {((User)userListBox.SelectedItem).Name} \nEmail: {((User)userListBox.SelectedItem).Email}";
             else
                 userInfoLabel.Content = string.Empty;
         }
-        //name text box
+
+        //Name textbox
         private void nameTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || userListBox.Items.Contains(nameTextBox.Text))
+            //Checks if name already exists in any of the listboxes and sets the add button to false if it does
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) || UserNameList(userListBox).Contains(nameTextBox.Text) ||
+                UserNameList(adminListBox).Contains(nameTextBox.Text))
             {
-                btnAdd.IsEnabled = userListBox.SelectedIndex >= 0;
                 btnAdd.IsEnabled = false;
-
-                if (userListBox.Items.Contains(nameTextBox.Text))
-                    //MessageBox.Show("Can not contain same text as before");
-                    labelNameErrorText.Content = "You can not type the same thing!";
+                //Gives error text if name exists in either list boxes
+                if (UserNameList(userListBox).Contains(nameTextBox.Text) || UserNameList(adminListBox).Contains(nameTextBox.Text))
+                    labelNameErrorText.Content = "Name is already taken";
+                //Gives error text if Name textbox is empty or whitespace
                 if (string.IsNullOrWhiteSpace(nameTextBox.Text))
-                    //MessageBox.Show("Must type a name");
-                    labelNameErrorText.Content = "Must type a name";
+                    labelNameErrorText.Content = "Type a name";
             }
             else if (btnAdd != null)
             {
@@ -101,24 +146,65 @@ namespace Laboration5
                 labelNameErrorText.Content = "";
             }
         }
+
+        //Email textbox
         private void emailTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(emailTextBox.Text) || userListBox.Items.Contains(emailTextBox.Text))
+            //Checks if Email already exists in any of the listboxes and sets the add button to false if it does
+            if (string.IsNullOrWhiteSpace(emailTextBox.Text) || UserEmailList(userListBox).Contains(emailTextBox.Text) ||
+                UserEmailList(adminListBox).Contains(emailTextBox.Text))
             {
                 btnAdd.IsEnabled = false;
-
-                if (userListBox.Items.Contains(emailTextBox.Text))
-                    //MessageBox.Show("Can not contain same text as before");
-                    labelEmailErrorText.Content = "You can not type the same thing!";
+                //Gives error text if email exists in either list boxes
+                if (UserEmailList(userListBox).Contains(emailTextBox.Text) || UserEmailList(adminListBox).Contains(emailTextBox.Text))
+                    labelEmailErrorText.Content = "Email adress is already taken";
+                //Gives error text if email textbox is empty or whitespace
                 if (string.IsNullOrWhiteSpace(emailTextBox.Text))
-                    // MessageBox.Show("Must type an email adress!");
-                    labelEmailErrorText.Content = "Must type email adress!";
+                    labelEmailErrorText.Content = "Type an email adress!";
             }
             else if (btnAdd != null)
             {
                 btnAdd.IsEnabled = true;
                 labelEmailErrorText.Content = "";
             }
+        }
+
+        //Move user button
+        private void btnMoveUserToAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            //Moves selected user objects from user listbox to admin listbox
+            if (userListBox.SelectedIndex != -1)
+            {
+                adminListBox.Items.Add(userListBox.SelectedValue);
+                userListBox.Items.Remove(userListBox.SelectedValue);
+            }
+            if (userListBox.Items.Count == 0)
+                btnMoveUserToAdmin.IsEnabled = false;
+        }
+
+        //Move Admin button
+        private void btnMoveAdminToUser_Click(object sender, RoutedEventArgs e)
+        {
+            //Moves selected user objects from admin listbox to user listbox
+            if (adminListBox.SelectedIndex != -1)
+            {
+                userListBox.Items.Add(adminListBox.SelectedValue);
+                adminListBox.Items.Remove(adminListBox.SelectedValue);
+            }
+            if (adminListBox.Items.Count == 0)
+                btnMoveAdminToUser.IsEnabled = false;
+        }
+        
+        //Admin list box
+        private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnMoveAdminToUser.IsEnabled = adminListBox.SelectedIndex >= 0;
+            //Shows admin info from admin listbox
+            if ((User)adminListBox.SelectedItem != null)
+                userInfoLabel.Content =
+                    $"Name: {((User)adminListBox.SelectedItem).Name} \nEmail: {((User)adminListBox.SelectedItem).Email}";
+            else
+                userInfoLabel.Content = string.Empty;
         }
     }
 }
