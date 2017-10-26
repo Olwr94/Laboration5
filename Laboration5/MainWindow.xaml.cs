@@ -56,11 +56,14 @@ namespace Laboration5
         {
             Match match = Regex.Match(emailTextBox.Text, EmailPattern, RegexOptions.IgnoreCase);
             //Checks if the Textboxes is empty or email already exists.
-            if ((string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(emailTextBox.Text)) ||
-                !match.Success)
+            if ((string.IsNullOrWhiteSpace(nameTextBox.Text)))
             {
-                nameTextBox.Text = "";
-                emailTextBox.Text = "";
+                MessageBox.Show("INVALID NAME");
+
+            }
+            if (string.IsNullOrWhiteSpace(emailTextBox.Text) || !match.Success)
+            {
+                MessageBox.Show("INVALID EMAIL");
             }
             else
             {
@@ -75,6 +78,7 @@ namespace Laboration5
         {
             var normalUser = (User)userListBox.SelectedItem;
             var adminUser = (User)adminListBox.SelectedItem;
+            btnAdd.IsEnabled = false;
 
             if (btnChange.Content.ToString() == "Edit")
             {
@@ -102,7 +106,7 @@ namespace Laboration5
                     userListBox.SelectedIndex = -1;
                     nameTextBox.Clear();
                     emailTextBox.Clear();
-                    userInfoLabel.Content = $"Name: {normalUser.Name}\nEmail: {normalUser.Email}";
+
                 }
                 if (adminListBox.SelectedIndex >= 0)
                 {
@@ -112,7 +116,6 @@ namespace Laboration5
                     adminListBox.SelectedIndex = -1;
                     nameTextBox.Clear();
                     emailTextBox.Clear();
-                    userInfoLabel.Content = $"Name: {adminUser.Name}\nEmail: {adminUser.Email}";
                 }
             }
         }
@@ -176,17 +179,11 @@ namespace Laboration5
                 UserNameList(adminListBox).Contains(nameTextBox.Text))
             {
                 btnAdd.IsEnabled = false;
-                //Gives error text if name exists in either list boxes
-                if (UserNameList(userListBox).Contains(nameTextBox.Text) || UserNameList(adminListBox).Contains(nameTextBox.Text))
-                    labelNameErrorText.Content = "Name is already taken";
-                //Gives error text if Name textbox is empty or whitespace
-                if (string.IsNullOrWhiteSpace(nameTextBox.Text))
-                    labelNameErrorText.Content = "Type a name";
+               
             }
-            else if (btnAdd != null)
+            else if (btnAdd != null && !btnChange.IsEnabled)
             {
                 btnAdd.IsEnabled = true;
-                labelNameErrorText.Content = "";
             }
         }
 
@@ -198,17 +195,10 @@ namespace Laboration5
                 UserEmailList(adminListBox).Contains(emailTextBox.Text))
             {
                 btnAdd.IsEnabled = false;
-                //Gives error text if email exists in either list boxes
-                if (UserEmailList(userListBox).Contains(emailTextBox.Text) || UserEmailList(adminListBox).Contains(emailTextBox.Text))
-                    labelEmailErrorText.Content = "Email adress is already taken";
-                //Gives error text if email textbox is empty or whitespace
-                if (string.IsNullOrWhiteSpace(emailTextBox.Text))
-                    labelEmailErrorText.Content = "Type an email adress!";
             }
-            else if (btnAdd != null)
+            else if (btnAdd != null && !btnChange.IsEnabled)
             {
                 btnAdd.IsEnabled = true;
-                labelEmailErrorText.Content = "";
             }
         }
 
